@@ -1,0 +1,43 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "semi" : ["off", "always"],
+    "comma-dangle": ["error", "always"]
+  },
+  "parser": "babel-eslint",
+  "rules": {
+    "strict": 0,
+    "no-console": 0,
+    "semi": 1,
+    "eol-last": 1,
+    "react/jsx-filename-extension": 0,
+    "react/prefer-stateless-function": 0,
+    "jsx-a11y/label-has-associated-control": 0,
+    "jsx-a11y/label-has-for": 0,
+    "jsx-closing-tag-location": 0,
+    "react/jsx-one-expression-per-line": 0,
+    "react/jsx-closing-tag-location": 0,
+    "react/button-has-type": 0,
+    "react/prop-types": 0
+  },
+  "plugins": ["react", "babel"],
+  "parserOptions": {
+    "ecmaVersion": 7,
+    "sourceType": "module"
+  },
+  "env": {
+    "es6":     true,
+    "browser": true,
+    "node":    true
+  },   
+  "extends": [
+    "airbnb",
+    "eslint:recommended", 
+    "plugin:react/recommended"
+  ],
+  "settings": {
+    "import/core-modules": [
+      "styled-jsx/css"
+    ]
+  }
+}

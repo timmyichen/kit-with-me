@@ -1,0 +1,76 @@
+{
+  "name": "kit-with-me",
+  "version": "0.1.0",
+  "description": "A social network for sharing contact information",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server:watch": "nodemon --watch server/ server/index.js",
+    "server": "node app.js",
+    "build": "./node_modules/.bin/next build",
+    "dev-client": "./node_modules/.bin/next",
+    "dev-server": "npm run server:watch",
+    "db": "~/mongo-server/mongo4.0/bin/mongod --smallfiles --dbpath ~/kit-mongo/data/",
+    "dev": "concurrently --names \"MONGO,SERVER,CLIENT\" -c \"bgGreen.bold,bgMagenta.bold,bgYellow.bold\" \"npm run db\" \"npm run dev-server\" \"npm run dev-client\"",
+    "lint": "./node_modules/.bin/eslint server/ pages/",
+    "precommit": "lint-staged"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timmyichen/kit-with-me.git"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --single-quote --trailing-comma all --write",
+      "git add"
+    ]
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/timmyichen/kit-with-me/issues"
+  },
+  "homepage": "https://github.com/timmyichen/kit-with-me#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bcrypt": "^3.0.0",
+    "body-parser": "^1.18.3",
+    "connect-mongo": "^2.0.1",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "express-router-async": "^0.3.0",
+    "express-session": "^1.15.6",
+    "mongoose": "^5.2.9",
+    "mongoose-unique-validator": "^2.0.1",
+    "morgan": "^1.9.0",
+    "next": "^6.1.2",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "prettier": "^1.14.2",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "styled-jsx": "^3.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.51",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.51",
+    "@babel/preset-env": "^7.0.0-beta.51",
+    "@babel/preset-react": "^7.0.0-beta.51",
+    "babel-eslint": "^9.0.0",
+    "babel-loader": "^8.0.0-beta.0",
+    "babel-plugin-react-transform": "^3.0.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "concurrently": "^3.6.1",
+    "eslint": "^5.4.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-babel": "^5.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.2.2",
+    "nodemon": "^1.18.3",
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0"
+  }
+}

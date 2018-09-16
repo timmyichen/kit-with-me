@@ -1,0 +1,8 @@
+.DS_Store
+*.pyc
+.env
+/node_modules
+/public/bundle.js
+package-lock.json
+npm-debug.log
+.next
