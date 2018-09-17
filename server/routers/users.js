@@ -1,10 +1,11 @@
 const router = require('express-router-async')();
 const { User } = require('../models');
-const go = require('../lib/asyncErrorHandling');
+const run = require('../lib/asyncErrorHandling');
+const { stripPassword } = require('./helpers/users');
 
 // API endpoint for getting a list of all users from the db
 router.getAsync('/api/users', async (req, res) => {
-  const [err, users] = await go(User.find({}));
+  const [err, users] = await run(User.find({}));
 
   if (err) {
     throw new Error(err.message);
@@ -19,10 +20,7 @@ router.get('/api/current_user', (req, res) => {
     return res.json();
   }
 
-  const userWithoutPassword = req.user._doc;
-  // don't send the password hash to user though
-  delete userWithoutPassword.password;
-  return res.json(userWithoutPassword);
+  return res.json(stripPassword(req.user));
 });
 
 module.exports = router;

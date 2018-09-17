@@ -6,4 +6,9 @@ router.getAsync('/', async (req, res) => {
   nextjs.sendHTML(res, html, req.method);
 });
 
+router.getAsync(['/signup', '/login'], async (req, res) => {
+  const html = await nextjs.render(req, res, 'auth', req.url);
+  nextjs.sendHTML(res, html, req.method);
+});
+
 module.exports = router;

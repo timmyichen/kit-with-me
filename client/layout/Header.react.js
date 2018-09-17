@@ -6,7 +6,7 @@ class Header extends React.Component {
   render() {
     return (
       <div className="ui container">
-        <div className="ui large secondary inverted pointing menu">
+        <div className="ui large secondary pointing menu">
           <a className="active item">Home</a>
           <a className="item">About</a>
           <a className="item">Privacy</a>

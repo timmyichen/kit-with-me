@@ -5,9 +5,9 @@ const passport = require('../middleware/passport');
 // 'local' is the strategy used, just means login with username/password or equivalent
 router.post(
   '/api/user/login',
-  passport.authenticate('local-login', { failureRedirect: '/login-fail' }),
+  passport.authenticate('local-login'),
   (req, res) => {
-    return res.redirect('/login-success');
+    res.json({ user: req.user });
   },
 );
 
@@ -16,7 +16,7 @@ router.post(
   '/api/user/signup',
   passport.authenticate('local-signup'),
   (req, res) => {
-    return res.redirect('/api/current_user');
+    res.json({ user: req.user });
   },
 );
 
@@ -24,15 +24,6 @@ router.post(
 router.get('/logout', function(req, res) {
   req.logout();
   return res.redirect('/');
-});
-
-// TODO - remove these, used for testing auth
-router.get('/login-fail', (req, res) => {
-  res.send('no login :(');
-});
-
-router.get('/login-success', (req, res) => {
-  res.send('yay login');
 });
 
 module.exports = router;
