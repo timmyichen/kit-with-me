@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const MongoStore = require('connect-mongo')(session);
 const config = require('./config');
 const authRoutes = require('./routers/auth');
+const userRoutes = require('./routers/users');
 const pageRoutes = require('./routers/pages');
 const nextjs = require('./lib/next');
 const { mongoose } = require('./lib/db');
@@ -38,6 +39,7 @@ app.use(passport.session());
 
 app.use(nextjs.router);
 app.use(authRoutes);
+app.use(userRoutes);
 app.use(pageRoutes);
 
 app.listen(config.PORT, () => {
