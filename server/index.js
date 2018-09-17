@@ -7,9 +7,12 @@ const MongoStore = require('connect-mongo')(session);
 const config = require('./config');
 const authRoutes = require('./routers/auth');
 const pageRoutes = require('./routers/pages');
+const nextjs = require('./lib/next');
 const { mongoose } = require('./lib/db');
 
 const app = express();
+
+nextjs.start();
 
 app.use(express.static('public'));
 
@@ -33,8 +36,8 @@ const passport = require('./middleware/passport');
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(nextjs.router);
 app.use(authRoutes);
-
 app.use(pageRoutes);
 
 app.listen(config.PORT, () => {
