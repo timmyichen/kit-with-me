@@ -1,6 +1,7 @@
 // @flow
 
 import * as React from 'react';
+import Link from 'next/link';
 
 class Header extends React.Component {
   render() {
@@ -11,8 +12,12 @@ class Header extends React.Component {
           <a className="item">About</a>
           <a className="item">Privacy</a>
           <div className="right item">
-            <a className="ui button">Log In</a>
-            <a className="ui button">Sign Up</a>
+            <Link href="/auth" as="/login">
+              <a className="ui button">Log In</a>
+            </Link>
+            <Link href="/auth" as="/signup">
+              <a className="ui button">Sign Up</a>
+            </Link>
           </div>
         </div>
         <style jsx>{`

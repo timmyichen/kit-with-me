@@ -17,7 +17,7 @@ router.getAsync('/api/users', async (req, res) => {
 // this gets the current user information
 router.get('/api/current_user', (req, res) => {
   if (!req.user) {
-    return res.json();
+    return res.json({ error: 'not logged in' });
   }
 
   return res.json(stripPassword(req.user));

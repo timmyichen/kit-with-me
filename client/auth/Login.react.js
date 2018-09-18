@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { Button, Form } from 'semantic-ui-react';
 
-class Signup extends React.Component {
+class Login extends React.Component {
   state = {
     firstName: '',
     lastName: '',
@@ -11,11 +11,11 @@ class Signup extends React.Component {
     password: '',
   };
 
-  onSignup = async () => {
+  onLogin = async () => {
     try {
-      await this.props.signup(this.state);
+      await this.props.login(this.state);
     } catch (e) {
-      throw new Error(e.message);
+      console.error(e.message);
     }
   };
 
@@ -25,26 +25,8 @@ class Signup extends React.Component {
     const { firstName, lastName, email, password } = this.state;
 
     return (
-      <div className="signup-page">
-        <Form className="signup-form">
-          <Form.Field>
-            <label>First Name</label>
-            <input
-              name="firstName"
-              onChange={this.onChangeField}
-              value={firstName}
-              placeholder="First Name"
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Last Name</label>
-            <input
-              name="lastName"
-              onChange={this.onChangeField}
-              value={lastName}
-              placeholder="Last Name"
-            />
-          </Form.Field>
+      <div className="login-page">
+        <Form className="login-form">
           <Form.Field>
             <label>Email</label>
             <input
@@ -64,12 +46,12 @@ class Signup extends React.Component {
               placeholder="Password"
             />
           </Form.Field>
-          <Button type="submit" onClick={this.onSignup}>
-            Sign Up
+          <Button type="submit" onClick={this.onLogin}>
+            Log In
           </Button>
         </Form>
         <style jsx>{`
-          .signup-page :global(.signup-form) {
+          .login-page :global(.login-form) {
             width: 400px;
             margin: 30px auto;
           }
@@ -79,4 +61,4 @@ class Signup extends React.Component {
   }
 }
 
-export default Signup;
+export default Login;

@@ -18,19 +18,23 @@ export function login({ email, password }) {
 export function signup({ firstName, lastName, email, password }) {
   console.log('wew');
   return async dispatch => {
-    console.log('dispatching');
     dispatch({
       type: 'SIGNUP_REQUEST',
     });
-    console.log('here');
-    const user = await axios.post('/api/user/signup', {
-      firstName,
-      lastName,
-      email,
-      password,
-    });
 
-    console.log('ayy');
+    let user;
+
+    try {
+      user = await axios.post('/api/user/signup', {
+        firstName,
+        lastName,
+        email,
+        password,
+      });
+    } catch (e) {
+      throw new Error(e.message);
+    }
+
     dispatch({
       type: 'SIGNUP_REQUEST',
       user,

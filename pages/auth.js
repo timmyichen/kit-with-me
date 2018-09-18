@@ -2,11 +2,13 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import Layout from '@/client/layout/Layout.react';
 import Signup from '@/client/auth/Signup.react';
-import { signup } from '@/client/auth/actions';
+import Login from '@/client/auth/Login.react';
+import { signup, login } from '@/client/auth/actions';
 
 const mapStateToProps = state => state;
 const mapDispatchToProps = dispatch => ({
   signup: obj => dispatch(signup(obj)),
+  login: obj => dispatch(login(obj)),
 });
 
 class authIndex extends React.Component {
@@ -19,10 +21,15 @@ class authIndex extends React.Component {
   }
 
   render() {
+    const { isSignup } = this.props;
     console.log(this.props);
     return (
       <Layout>
-        <Signup signup={this.props.signup} />
+        {isSignup ? (
+          <Signup signup={this.props.signup} />
+        ) : (
+          <Login login={this.props.login} />
+        )}
       </Layout>
     );
   }

@@ -57,6 +57,7 @@ passport.use(
 
         user.save((err, user) => {
           if (err) {
+            console.log(err);
             if (err.name === 'ValidationError') {
               return done(null, false, {
                 message: 'A user with that email exists.',
