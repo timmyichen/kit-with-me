@@ -3,12 +3,15 @@ import Layout from '@/client/layout/Layout.react';
 
 class Index extends React.Component {
   static async getInitialProps(ctx) {
-    return { path: ctx.asPath };
+    return {
+      path: ctx.asPath,
+    };
   }
 
   render() {
+    console.log(this.props);
     return (
-      <Layout path={this.props.path}>
+      <Layout path={this.props.path} isLoggedIn={false} noAuthHeader>
         <div>
           <div className="ui vertical masthead inverted blue center aligned segment">
             <div className="ui text container">

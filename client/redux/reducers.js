@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
-import auth from '@/client/auth/reducers';
+import { authReducers, userReducers } from '@/client/auth/reducers';
 
 export default combineReducers({
-  auth,
+  auth: authReducers,
+  user: userReducers,
 });

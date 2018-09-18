@@ -16,7 +16,6 @@ export function login({ email, password }) {
 }
 
 export function signup({ firstName, lastName, email, password }) {
-  console.log('wew');
   return async dispatch => {
     dispatch({
       type: 'SIGNUP_REQUEST',
@@ -38,6 +37,27 @@ export function signup({ firstName, lastName, email, password }) {
     dispatch({
       type: 'SIGNUP_REQUEST',
       user,
+    });
+  };
+}
+
+export function loadUser() {
+  return async dispatch => {
+    dispatch({
+      type: 'LOAD_USER_REQUEST',
+    });
+
+    let user;
+
+    try {
+      user = await axios.get('/api/current_user');
+    } catch (e) {
+      throw new Error(e.message);
+    }
+
+    dispatch({
+      type: 'LOAD_USER_SUCCESS',
+      user: user.data,
     });
   };
 }

@@ -1,4 +1,6 @@
-const authReducer = (state = {}, action) => {
+// @flow
+
+export const authReducers = (state = {}, action) => {
   switch (action.type) {
     case 'SIGN_IN_REQUEST':
     case 'LOG_IN_REQUEST':
@@ -17,4 +19,13 @@ const authReducer = (state = {}, action) => {
   }
 };
 
-export default authReducer;
+export const userReducers = (state = {}, action) => {
+  switch (action.type) {
+    case 'LOAD_USER_SUCCESS':
+    case 'SIGN_IN_SUCCESS':
+    case 'LOG_IN_SUCCESS':
+      return action.user;
+    default:
+      return state;
+  }
+};

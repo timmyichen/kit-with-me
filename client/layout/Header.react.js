@@ -19,6 +19,7 @@ type NavItemType = {
 
 type Props = {
   path: string,
+  isLoggedIn: boolean,
 };
 
 class Header extends React.Component<Props> {
@@ -34,12 +35,25 @@ class Header extends React.Component<Props> {
             />
           ))}
           <div className="right item">
-            <Link href="/auth" as="/login">
-              <a className="ui button">Log In</a>
-            </Link>
-            <Link href="/auth" as="/signup">
-              <a className="ui button">Sign Up</a>
-            </Link>
+            {!this.props.isLoggedIn ? (
+              <div>
+                <Link prefetch href="/auth" as="/login">
+                  <a className="ui button">Log In</a>
+                </Link>
+                <Link prefetch href="/auth" as="/signup">
+                  <a className="ui button">Sign Up</a>
+                </Link>
+              </div>
+            ) : (
+              <div>
+                <Link prefetch href="/dashboard" as="/dashboard">
+                  <a className="ui button">Go to Dashboard</a>
+                </Link>
+                <a href="/logout" className="ui button">
+                  Log Out
+                </a>
+              </div>
+            )}
           </div>
         </div>
         <style jsx>{`
@@ -53,7 +67,7 @@ class Header extends React.Component<Props> {
 }
 
 const NavItem = (props: NavItemType) => (
-  <Link href={props.href} as={props.as}>
+  <Link prefetch href={props.href} as={props.as}>
     <a className={classnames('item', { active: props.path === props.as })}>
       {props.label}
     </a>
