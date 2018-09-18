@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Layout from '@/client/layout/Layout.react';
 
-class Index extends React.Component {
+class Privacy extends React.Component {
   static async getInitialProps(ctx) {
     return { path: ctx.asPath };
   }
@@ -12,8 +12,7 @@ class Index extends React.Component {
         <div>
           <div className="ui vertical masthead inverted blue center aligned segment">
             <div className="ui text container">
-              <h1 className="ui header inverted">Keep in Touch</h1>
-              <h2>Never lose track of a friend again</h2>
+              <h1 className="ui header inverted">Privacy Policy</h1>
             </div>
           </div>
         </div>
@@ -30,4 +29,4 @@ class Index extends React.Component {
   }
 }
 
-export default Index;
+export default Privacy;

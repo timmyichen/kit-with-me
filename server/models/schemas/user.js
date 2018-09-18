@@ -32,6 +32,7 @@ const userSchema = new Schema({
   _id: {
     type: Schema.Types.ObjectId,
     required: true,
+    unique: true,
   },
   firstName: {
     type: String,

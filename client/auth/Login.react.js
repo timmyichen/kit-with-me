@@ -5,8 +5,6 @@ import { Button, Form } from 'semantic-ui-react';
 
 class Login extends React.Component {
   state = {
-    firstName: '',
-    lastName: '',
     email: '',
     password: '',
   };
@@ -22,7 +20,7 @@ class Login extends React.Component {
   onChangeField = e => this.setState({ [e.target.name]: e.target.value });
 
   render() {
-    const { firstName, lastName, email, password } = this.state;
+    const { email, password } = this.state;
 
     return (
       <div className="login-page">
