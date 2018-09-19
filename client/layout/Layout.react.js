@@ -26,12 +26,10 @@ class Layout extends React.Component<Props> {
 
   render() {
     const { user, path, noAuthHeader } = this.props;
-    console.log(this.props);
 
     const isLoggedIn = !!user;
 
     const HeaderComponent = isLoggedIn && !noAuthHeader ? AuthedHeader : Header;
-    console.log(HeaderComponent);
     return (
       <div>
         <Head>

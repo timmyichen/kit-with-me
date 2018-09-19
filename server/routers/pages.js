@@ -1,5 +1,6 @@
 const router = require('express-router-async')();
 const nextjs = require('../lib/next');
+const asUser = require('../middleware/asUser');
 
 router.getAsync('/', async (req, res) => {
   const html = await nextjs.render(req, res, 'index', req.url);
@@ -7,9 +8,17 @@ router.getAsync('/', async (req, res) => {
 });
 
 const staticPages = ['about', 'privacy'];
+const authedPages = ['dashboard', 'contacts', 'my-info'];
 
 staticPages.forEach(page =>
   router.getAsync(`/${page}`, async (req, res) => {
+    const html = await nextjs.render(req, res, page, req.url);
+    nextjs.sendHTML(res, html, req.method);
+  }),
+);
+
+authedPages.forEach(page =>
+  router.getAsync(`/${page}`, asUser, async (req, res) => {
     const html = await nextjs.render(req, res, page, req.url);
     nextjs.sendHTML(res, html, req.method);
   }),
