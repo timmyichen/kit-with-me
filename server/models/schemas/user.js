@@ -42,6 +42,11 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  profileName: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   email: {
     type: String,
     lowercase: true,
@@ -51,12 +56,7 @@ const userSchema = new Schema({
   password: {
     type: String,
   },
-  contactInfos: [
-    {
-      type: objectIdType,
-      ref: 'ContactInfo',
-    },
-  ],
+  contactInfos: [contactInfoConnection],
   connections: [userConnection],
   timeCreated: {
     type: Date,

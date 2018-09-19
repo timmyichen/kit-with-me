@@ -3,6 +3,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 const { User } = require('../models');
 const { mongoose } = require('../lib/db');
+const { generateUniqueProfileName } = require('../routers/helpers/users');
 
 // passport doesnt play nicely with async/await :(
 
@@ -47,27 +48,30 @@ passport.use(
       bcrypt.hash(req.body.password, 10, (err, hash) => {
         if (err) return done(null, false, { message: 'error hashing' });
 
-        const user = new User({
-          _id: new mongoose.Types.ObjectId(),
-          firstName: req.body.firstName,
-          lastName: req.body.lastName,
-          email: req.body.email,
-          password: hash,
-        });
+        generateUniqueProfileName().then(profileName => {
+          const user = new User({
+            _id: new mongoose.Types.ObjectId(),
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            password: hash,
+            profileName,
+          });
 
-        user.save((err, user) => {
-          if (err) {
-            console.log(err);
-            if (err.name === 'ValidationError') {
-              return done(null, false, {
-                message: 'A user with that email exists.',
-              });
-            } else {
-              return done(null, false, { message: 'Failed to save' });
+          user.save((err, user) => {
+            if (err) {
+              console.log(err);
+              if (err.name === 'ValidationError') {
+                return done(null, false, {
+                  message: 'A user with that email exists.',
+                });
+              } else {
+                return done(null, false, { message: 'Failed to save' });
+              }
             }
-          }
 
-          return done(null, user);
+            return done(null, user);
+          });
         });
       });
     },
