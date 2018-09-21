@@ -10,8 +10,10 @@
     "build": "./node_modules/.bin/next build",
     "dev-client": "./node_modules/.bin/next",
     "dev-server": "npm run server:watch",
-    "db": "~/mongo-server/mongo4.0/bin/mongod --smallfiles --dbpath ~/kit-mongo/data/",
-    "dev": "concurrently --names \"MONGO,SERVER,CLIENT\" -c \"bgGreen.bold,bgMagenta.bold,bgYellow.bold\" \"npm run db\" \"npm run dev-server\" \"npm run dev-client\"",
+    "db": "./node_modules/.bin/run-rs -v 4.0.0 --keep",
+    "db:clear": "./node_modules/.bin/run-rs -v 4.0.0",
+    "db:shell": "./node_modules/.bin/run-rs -v 4.0.0 --keep --shell",
+    "dev": "concurrently --names \"SERVER,CLIENT\" -c \"bgMagenta.bold,bgYellow.bold\" \"npm run dev-server\" \"npm run dev-client\"",
     "lint": "./node_modules/.bin/eslint server/ pages/ client/",
     "flow": "./node_modules/.bin/flow",
     "precommit": "lint-staged"
@@ -61,8 +63,8 @@
   "devDependencies": {
     "@babel/core": "7.0.0-beta.47",
     "@babel/plugin-proposal-class-properties": "7.0.0-beta.47",
-    "@babel/preset-flow": "7.0.0-beta.47",
     "@babel/preset-env": "7.0.0-beta.47",
+    "@babel/preset-flow": "7.0.0-beta.47",
     "@babel/preset-react": "7.0.0-beta.47",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^9.0.0",
@@ -81,6 +83,7 @@
     "husky": "^0.14.3",
     "lint-staged": "^7.2.2",
     "nodemon": "^1.18.3",
+    "run-rs": "^0.2.1",
     "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0"
   }
