@@ -58,6 +58,7 @@
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
     "semantic-ui-react": "^0.82.5",
+    "slug": "^0.9.1",
     "styled-jsx": "^3.0.2"
   },
   "devDependencies": {
