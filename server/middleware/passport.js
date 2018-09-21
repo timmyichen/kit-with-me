@@ -48,12 +48,14 @@ passport.use(
       bcrypt.hash(req.body.password, 10, (err, hash) => {
         if (err) return done(null, false, { message: 'error hashing' });
 
-        generateUniqueProfileName().then(profileName => {
+        const { firstName, lastName, email } = req.body;
+
+        generateUniqueProfileName({ firstName, lastName }).then(profileName => {
           const user = new User({
             _id: new mongoose.Types.ObjectId(),
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            email: req.body.email,
+            firstName,
+            lastName,
+            email,
             password: hash,
             profileName,
           });

@@ -1,5 +1,4 @@
-const colors = require('../../lib/colors');
-const animals = require('../../lib/animals');
+const slug = require('slug');
 const { User } = require('../../models');
 
 function stripPassword(user) {
@@ -9,19 +8,20 @@ function stripPassword(user) {
   return userWithoutPassword;
 }
 
-function generateProfileName() {
-  const color = colors[Math.floor(Math.random() * colors.length)];
-  const animal = animals[Math.floor(Math.random() * animals.length)];
-  return color + animal;
-}
+async function generateUniqueProfileName(user) {
+  const { firstName, lastName } = user;
+  const combinedName = slug(firstName + lastName);
+  let profileName = combinedName + Math.floor(Math.random() * 20 + 1);
+  let foundUser = true;
 
-async function generateUniqueProfileName() {
-  let isUnique = false;
-  let profileName;
-  while (!isUnique) {
-    profileName = generateProfileName();
-    isUnique = !(await User.findOne({ profileName }));
+  while (foundUser) {
+    const re = new RegExp(`^${profileName}`, 'i');
+    foundUser = !!(await User.findOne({ profileName }, {}));
+    if (foundUser) {
+      profileName = combinedName + Math.floor(Math.random() * 20 + 1);
+    }
   }
+
   return profileName;
 }
 
