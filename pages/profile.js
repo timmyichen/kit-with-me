@@ -1,8 +1,9 @@
 import * as React from 'react';
+import axios from 'axios';
 import { Button, Icon } from 'semantic-ui-react';
 import Layout from '@/client/layout/Layout.react';
 
-class MyInfo extends React.Component {
+class ProfilePage extends React.Component {
   static async getInitialProps(ctx) {
     console.log(ctx.req.params);
     return {
@@ -10,6 +11,33 @@ class MyInfo extends React.Component {
       profileName: ctx.req.params.profileName,
     };
   }
+
+  state = {
+    profileUser: null,
+  };
+
+  componentDidMount() {
+    this.getProfileUser();
+  }
+
+  async getProfileUser() {
+    const res = await axios.get(`/api/user/profile/${this.props.profileName}`);
+    const profileUser = res.data;
+
+    this.setState({ profileUser });
+  }
+
+  addFriend = async () => {
+    if (!this.state.profileUser) return;
+
+    try {
+      await axios.post('/api/friends/request', {
+        id: this.state.profileUser.id,
+      });
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
 
   render() {
     return (
@@ -19,7 +47,12 @@ class MyInfo extends React.Component {
           's profile
         </div>
         <div>
-          <Button color="blue" icon labelPosition="left">
+          <Button
+            color="blue"
+            icon
+            labelPosition="left"
+            onClick={this.addFriend}
+          >
             <Icon name="user plus" />
             Add Friend
           </Button>
@@ -41,4 +74,4 @@ class MyInfo extends React.Component {
   }
 }
 
-export default MyInfo;
+export default ProfilePage;

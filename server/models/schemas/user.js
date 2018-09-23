@@ -6,21 +6,21 @@ const Schema = mongoose.Schema;
 const objectIdType = Schema.Types.ObjectId;
 
 const userConnection = new Schema({
-  _id: {
+  userId: {
     type: objectIdType,
     ref: 'User',
     unique: true,
     required: true,
   },
-  type: {
+  status: {
     type: String,
-    enum: ['requester', 'requestee', 'friend', 'blocked'],
+    enum: ['requested', 'requestedBy', 'friend', 'blocked', 'blockedBy'],
     required: true,
   },
 });
 
 const contactInfoConnection = new Schema({
-  _id: {
+  infoId: {
     type: objectIdType,
     ref: 'ContactInfo',
     unique: true,

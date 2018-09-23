@@ -59,7 +59,8 @@
     "redux-thunk": "^2.3.0",
     "semantic-ui-react": "^0.82.5",
     "slug": "^0.9.1",
-    "styled-jsx": "^3.0.2"
+    "styled-jsx": "^3.0.2",
+    "util": "^0.11.0"
   },
   "devDependencies": {
     "@babel/core": "7.0.0-beta.47",

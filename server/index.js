@@ -5,9 +5,12 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const MongoStore = require('connect-mongo')(session);
 const config = require('./config');
+
 const authRoutes = require('./routers/auth');
 const userRoutes = require('./routers/users');
 const pageRoutes = require('./routers/pages');
+const friendRoutes = require('./routers/friends');
+
 const nextjs = require('./lib/next');
 const { mongoose } = require('./lib/db');
 
@@ -41,6 +44,7 @@ app.use(nextjs.router);
 app.use(authRoutes);
 app.use(userRoutes);
 app.use(pageRoutes);
+app.use(friendRoutes);
 
 app.listen(config.PORT, () => {
   console.log(`server started on port ${config.PORT}`);
